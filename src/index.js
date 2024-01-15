@@ -12,6 +12,7 @@ const PORT = process.env.PORT || port;
 const AuthorizationRoutes = require("./authorization/routes");
 const UserRoutes = require("./users/routes");
 const ProductRoutes = require("./products/routes");
+const AWSRoutes = require("./aws/routes")
 
 // Sequelize model imports
 const UserModel = require("./common/models/User");
@@ -42,6 +43,7 @@ sequelize
 
     // Attaching the Authentication and User Routes to the app.
     app.use("/api", AuthorizationRoutes);
+    app.use("/api/aws", AWSRoutes)
     app.use("/api/user", UserRoutes);
     app.use("/api/product", ProductRoutes);
 
