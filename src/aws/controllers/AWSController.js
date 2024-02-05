@@ -3,14 +3,12 @@ const startInstance = require('../actions/start-instance');
 const stopInstance = require('../actions/stop-instance');
 
 module.exports = {
-    getServerStatus: (req,res) => {
-        describeInstance()
-        .then((instance) => {
-            return res.status(200).json({
-                status: true,
-                serverStatus: instance[0].State.Name,
-                serverName: instance[0].KeyName
-            });
+    getInstances: (req,res) => {
+        describeInstance(req)
+        .then((instances) => {
+            return res.status(200).json(
+                instances
+            );
         })
         .catch((err) => {
             return res.status(500).json({
@@ -23,7 +21,7 @@ module.exports = {
     startServer: (req,res) => {
         startInstance(req.body.serverId)
         .then((status) => {
-            return res.status(500).json({
+            return res.status(200).json({
                 status: true,
                 serverStatus: status
             });

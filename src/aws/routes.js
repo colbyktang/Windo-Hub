@@ -14,9 +14,9 @@ const serverStatusPayload = require("./schemas/serverStatusPayload");
 const { roles } = require("../config");
 
 router.get(
-  "/status",
+  "/instances",
   [isAuthenticatedMiddleware.check, CheckPermissionMiddleware.has(roles.ADMIN), SchemaValidationMiddleware.verify(serverStatusPayload)],
-  AWSController.getServerStatus,
+  AWSController.getInstances,
 );
 
 router.post(
